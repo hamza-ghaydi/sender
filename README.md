@@ -1,6 +1,6 @@
 # Email Sender App
 
-Full-stack email sender with Node.js + Express + SQLite backend and React + Tailwind frontend.
+Full-stack email sender with Node.js + Express + SQLite backend and React (Vite + TS) frontend.
 
 ## Prerequisites
 
@@ -31,9 +31,9 @@ The backend will run on http://localhost:5000
 4. **Start the Frontend Server (in a new terminal):**
 ```bash
 cd frontend
-npm start
+npm run dev
 ```
-The frontend will run on http://localhost:3000
+The frontend will run on http://localhost:5173
 
 ## Alternative: Development Mode
 
@@ -48,20 +48,23 @@ npm run dev
 **Frontend:**
 ```bash
 cd frontend
-npm start
+npm run dev
 ```
 
 ## Access the Application
 
-- **Frontend**: http://localhost:3000
+- **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:5000
 
-## Usage
+## Frontend Overview
 
-1. **SMTP Config**: Configure email provider (Gmail: smtp.gmail.com:587)
-2. **Settings**: Set delay (1000-5000ms) and daily limits (50-200)  
-3. **Upload Emails**: Add emails via text or CSV
-4. **Dashboard**: Start sending and monitor progress
+Pages in `frontend`:
+- Email List: upload CSV or paste list, view statuses
+- SMTP Profiles: manage multiple local profiles; click "Set Active on Backend" to save selected profile to server. Backend uses the latest saved profile when sending.
+- Settings: set delay (ms) and max emails per day
+- Send: compose subject/HTML, start/stop, view progress
+
+API base URL is `http://localhost:5000/api`. If needed, edit `frontend/src/api.ts`.
 
 ## Features
 
