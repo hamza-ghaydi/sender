@@ -114,6 +114,151 @@ export const api = {
       { method: "POST" }
     );
   },
+
+  // Email Lists
+  getEmailLists() {
+    return request<{ success: boolean; lists: any[] }>("/email-lists");
+  },
+  createEmailList(name: string) {
+    return request<{ success: boolean; message: string; list: any }>(
+      "/email-lists",
+      { method: "POST", body: JSON.stringify({ name }) }
+    );
+  },
+  updateEmailList(id: number, name: string) {
+    return request<{ success: boolean; message: string }>(`/email-lists/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ name }),
+    });
+  },
+  deleteEmailList(id: number) {
+    return request<{ success: boolean; message: string }>(`/email-lists/${id}`, {
+      method: "DELETE",
+    });
+  },
+  getEmailListItems(listId: number) {
+    return request<{ success: boolean; emails: any[] }>(`/email-lists/${listId}/emails`);
+  },
+  addEmailsToList(listId: number, emails: string[]) {
+    return request<{ success: boolean; message: string; results: any }>(
+      `/email-lists/${listId}/emails`,
+      { method: "POST", body: JSON.stringify({ emails }) }
+    );
+  },
+  uploadEmailsToList(listId: number, formData: FormData) {
+    return request<{ success: boolean; message: string; results: any }>(
+      `/email-lists/${listId}/emails`,
+      { method: "POST", body: formData }
+    );
+  },
+  updateEmailInList(listId: number, emailId: number, email: string) {
+    return request<{ success: boolean; message: string }>(
+      `/email-lists/${listId}/emails/${emailId}`,
+      { method: "PUT", body: JSON.stringify({ email }) }
+    );
+  },
+  deleteEmailFromList(listId: number, emailId: number) {
+    return request<{ success: boolean; message: string }>(
+      `/email-lists/${listId}/emails/${emailId}`,
+      { method: "DELETE" }
+    );
+  },
+
+  // SMTP Profiles
+  getSmtpProfiles() {
+    return request<{ success: boolean; profiles: any[] }>("/smtp-profiles");
+  },
+  getSmtpProfile(id: number) {
+    return request<{ success: boolean; profile: any }>(`/smtp-profiles/${id}`);
+  },
+  createSmtpProfile(profile: {
+    name: string;
+    host: string;
+    port: number;
+    username: string;
+    password: string;
+    encryption: string;
+  }) {
+    return request<{ success: boolean; message: string; profile: any }>(
+      "/smtp-profiles",
+      { method: "POST", body: JSON.stringify(profile) }
+    );
+  },
+  updateSmtpProfile(id: number, profile: {
+    name: string;
+    host: string;
+    port: number;
+    username: string;
+    password: string;
+    encryption: string;
+  }) {
+    return request<{ success: boolean; message: string }>(`/smtp-profiles/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(profile),
+    });
+  },
+  deleteSmtpProfile(id: number) {
+    return request<{ success: boolean; message: string }>(`/smtp-profiles/${id}`, {
+      method: "DELETE",
+    });
+  },
+  testSmtpProfile(id: number) {
+    return request<{ success: boolean; message: string }>(`/smtp-profiles/${id}/test`, {
+      method: "POST",
+    });
+  },
+
+  // Campaigns
+  getCampaigns() {
+    return request<{ success: boolean; campaigns: any[] }>("/campaigns");
+  },
+  getCampaign(id: number) {
+    return request<{ success: boolean; campaign: any }>(`/campaigns/${id}`);
+  },
+  createCampaign(campaign: {
+    name: string;
+    subject: string;
+    template: string;
+    list_id: number;
+    smtp_profile_id: number;
+  }) {
+    return request<{ success: boolean; message: string; campaign: any }>(
+      "/campaigns",
+      { method: "POST", body: JSON.stringify(campaign) }
+    );
+  },
+  updateCampaign(id: number, campaign: {
+    name: string;
+    subject: string;
+    template: string;
+    list_id: number;
+    smtp_profile_id: number;
+    status?: string;
+  }) {
+    return request<{ success: boolean; message: string }>(`/campaigns/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(campaign),
+    });
+  },
+  deleteCampaign(id: number) {
+    return request<{ success: boolean; message: string }>(`/campaigns/${id}`, {
+      method: "DELETE",
+    });
+  },
+  startCampaign(id: number) {
+    return request<{ success: boolean; message: string }>(`/campaigns/${id}/start`, {
+      method: "POST",
+    });
+  },
+  getCampaignEmails(id: number) {
+    return request<{ success: boolean; emails: any[] }>(`/campaigns/${id}/emails`);
+  },
+  getCampaignStats(id: number) {
+    return request<{ success: boolean; stats: any }>(`/campaigns/${id}/stats`);
+  },
+  getCampaignDebug(id: number) {
+    return request<{ success: boolean; debug: any }>(`/campaigns/${id}/debug`);
+  },
 };
 
 

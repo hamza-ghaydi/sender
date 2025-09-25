@@ -23,12 +23,18 @@ const smtpRoutes = require('./routes/smtp');
 const settingsRoutes = require('./routes/settings');
 const emailRoutes = require('./routes/emails');
 const sendRoutes = require('./routes/send');
+const emailListsRoutes = require('./routes/email-lists');
+const smtpProfilesRoutes = require('./routes/smtp-profiles');
+const campaignsRoutes = require('./routes/campaigns');
 
 // Use routes
 app.use('/api/smtp', smtpRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/emails', emailRoutes);
 app.use('/api/send', sendRoutes);
+app.use('/api/email-lists', emailListsRoutes);
+app.use('/api/smtp-profiles', smtpProfilesRoutes);
+app.use('/api/campaigns', campaignsRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

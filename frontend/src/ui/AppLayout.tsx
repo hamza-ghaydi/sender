@@ -8,7 +8,9 @@ export function AppLayout() {
         <h1 className="brand">Sender</h1>
         <nav>
           <NavLink to="/emails" className={({ isActive }) => isActive ? 'active' : ''}>Email List</NavLink>
-          <NavLink to="/smtp" className={({ isActive }) => isActive ? 'active' : ''}>SMTP Profiles</NavLink>
+          <NavLink to="/email-lists" className={({ isActive }) => isActive ? 'active' : ''}>Email Lists</NavLink>
+          <NavLink to="/smtp-profiles" className={({ isActive }) => isActive ? 'active' : ''}>SMTP Profiles</NavLink>
+          <NavLink to="/campaigns" className={({ isActive }) => isActive ? 'active' : ''}>Campaigns</NavLink>
           <NavLink to="/settings" className={({ isActive }) => isActive ? 'active' : ''}>Settings</NavLink>
           <NavLink to="/send" className={({ isActive }) => isActive ? 'active' : ''}>Send</NavLink>
         </nav>
